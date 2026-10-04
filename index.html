@@ -7,7 +7,7 @@
 <meta name="description" content="إهداء مرئي وبطاقة تكريم فاخرة للهاتف بمناسبة يوم المعلم العالمي للمعلمة الفاضلة آلاء ربابعة من إعداد الطالب غالب الجازي"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800;900&family=Reem+Kufi:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet"/>
 
 <style>
 /* ========================================================
@@ -1377,10 +1377,11 @@ body {
       this.life -= 0.025;
     }
     draw() {
+      if (this.size <= 0 || this.life <= 0) return;
       celCtx.beginPath();
-      celCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      celCtx.arc(this.x, this.y, Math.max(0.1, this.size), 0, Math.PI * 2);
       celCtx.fillStyle = this.color;
-      celCtx.globalAlpha = Math.max(0, this.life);
+      celCtx.globalAlpha = Math.max(0, Math.min(1, this.life));
       celCtx.fill();
     }
   }
