@@ -11,21 +11,17 @@
 
 <style>
 /* ========================================================
-   MOBILE LUXURY PALETTE: NOIR & RADIANT CHAMPAGNE 24K GOLD
+   LIGHTWEIGHT HIGH-PERFORMANCE MOBILE LUXURY THEME
    ======================================================== */
 :root {
   --bg-deep: #07080b;
-  --bg-card: #0f121a;
-  --gold-glow: #e8c374;
+  --bg-card: #0e1118;
   --gold-primary: #e5be6d;
   --gold-light: #fff0c7;
   --gold-rich: #caa049;
-  --gold-deep: #926f28;
   --text-white: #ffffff;
   --gold-gradient: linear-gradient(135deg, #fff7de 0%, #e5be6d 35%, #caa049 70%, #fff2cb 100%);
-  --gold-border: rgba(229, 190, 109, 0.45);
-  --tv-chassis: #1e1814;
-  --tv-bezel: #12100e;
+  --gold-border: rgba(229, 190, 109, 0.4);
   --font-kufi: 'Reem Kufi', sans-serif;
   --font-ruqaa: 'Aref Ruqaa', cursive;
   --font-amiri: 'Amiri', serif;
@@ -55,7 +51,7 @@ body {
   background: radial-gradient(circle at 50% 20%, #151926 0%, #090b10 55%, #040507 100%);
 }
 
-/* Dedicated Mobile Container */
+/* Dedicated Mobile Container (Zero Layout Shift) */
 .mobile-wrapper {
   width: 100%;
   max-width: 430px;
@@ -64,42 +60,34 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 50px rgba(0,0,0,0.9);
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
   background: transparent;
 }
 
-/* Background Effects */
-#bg-canvas, #celebration-canvas, #touch-canvas {
+/* Single Lightweight Celebration Canvas (Idle CPU = 0%) */
+#celebration-canvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none;
+  z-index: 40;
 }
-#bg-canvas { z-index: 1; }
-#touch-canvas { z-index: 30; }
-#celebration-canvas { z-index: 40; }
 
-.ambient-spotlight {
+/* GPU-Accelerated Static Radial Glow (Zero Lag, No Filter Blur) */
+.ambient-glow {
   position: absolute;
-  top: 15%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  width: 340px;
-  height: 340px;
-  background: radial-gradient(circle, rgba(229, 190, 109, 0.16) 0%, transparent 70%);
-  filter: blur(45px);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(229, 190, 109, 0.12) 0%, transparent 65%);
   pointer-events: none;
   z-index: 2;
-  animation: pulseGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes pulseGlow {
-  0% { transform: translateX(-50%) scale(0.9); opacity: 0.6; }
-  100% { transform: translateX(-50%) scale(1.15); opacity: 1; }
 }
 
 /* ========================================================
-   STAGE 0: THE RETRO/LUXURY TV BROADCAST INTRO (في بداية الموقع)
+   STAGE 0: THE RETRO TV BROADCAST INTRO (في بداية الموقع)
    ======================================================== */
 .tv-screen-stage {
   position: absolute;
@@ -111,12 +99,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 16px 26px 16px;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .tv-screen-stage.fade-out {
   opacity: 0;
-  transform: scale(0.94);
+  transform: scale(0.95);
   pointer-events: none;
 }
 
@@ -136,7 +124,6 @@ body {
   color: var(--gold-light);
   font-family: var(--font-kufi);
   font-size: 12px;
-  box-shadow: 0 0 15px rgba(229, 190, 109, 0.2);
 }
 
 .live-indicator {
@@ -144,13 +131,13 @@ body {
   height: 8px;
   border-radius: 50%;
   background: #ff3344;
-  box-shadow: 0 0 10px #ff3344;
+  box-shadow: 0 0 8px #ff3344;
   animation: liveBlink 1.4s infinite alternate;
 }
 
 @keyframes liveBlink {
-  0% { opacity: 0.4; transform: scale(0.85); }
-  100% { opacity: 1; transform: scale(1.2); }
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 
 .tv-stage-title {
@@ -158,11 +145,11 @@ body {
   font-size: clamp(16px, 4.2vw, 20px);
   color: #ffffff;
   margin-top: 8px;
-  text-shadow: 0 0 15px rgba(229, 190, 109, 0.5);
+  text-shadow: 0 2px 10px rgba(229, 190, 109, 0.4);
 }
 
 /* ========================================================
-   THE TV FRAME APPARATUS (معدل ليظهر الوجه بالكامل وبوضوح)
+   THE TV FRAME APPARATUS (الوجه كامل وظاهر 100%)
    ======================================================== */
 .tv-apparatus {
   position: relative;
@@ -178,7 +165,7 @@ body {
 .tv-antennas {
   position: relative;
   width: 100px;
-  height: 24px;
+  height: 22px;
   display: flex;
   justify-content: center;
   margin-bottom: -4px;
@@ -187,7 +174,7 @@ body {
 
 .antenna-rod {
   width: 3px;
-  height: 32px;
+  height: 30px;
   background: linear-gradient(180deg, #fff0c7, #caa049, #5c4416);
   border-radius: 3px;
   position: relative;
@@ -202,64 +189,54 @@ body {
   width: 9px; height: 9px;
   border-radius: 50%;
   background: var(--gold-primary);
-  box-shadow: 0 0 10px var(--gold-primary);
+  box-shadow: 0 0 6px var(--gold-primary);
 }
 
 /* TV Cabinet */
 .tv-cabinet {
   position: relative;
   width: 100%;
-  background: linear-gradient(145deg, #2b221a 0%, #1c1510 50%, #120e0a 100%);
-  border: 8px solid #14100c;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 30px rgba(229, 190, 109, 0.2), inset 0 0 0 2px rgba(229, 190, 109, 0.45);
-  padding: 10px;
+  background: linear-gradient(145deg, #282018 0%, #1a140f 50%, #110d0a 100%);
+  border: 7px solid #14100c;
+  border-radius: 22px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.85), inset 0 0 0 1.5px rgba(229, 190, 109, 0.4);
+  padding: 8px;
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
-/* TV Bezel & Screen (عالي الارتفاع ليحتوي كامل الرأس والوجه بدون قص) */
+/* TV Bezel & Screen (عالي الارتفاع ليحتوي كامل الرأس والوجه) */
 .tv-screen-wrapper {
   flex: 1;
   position: relative;
   background: #000000;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
-  border: 3px solid #080706;
-  box-shadow: inset 0 0 25px rgba(0,0,0,0.95), 0 0 0 1px rgba(229, 190, 109, 0.35);
+  border: 2px solid #080706;
   height: 375px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* CRITICAL: object-fit: contain to ensure the entire face is 100% visible */
+/* CRITICAL: object-fit: contain to ensure full face & body are 100% visible */
 .tv-video-element {
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center center;
   background: #000;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
-/* CRT Glass Glare Overlay */
+/* Subtle CRT Glare (CSS only, zero GPU lag) */
 .tv-glass-glare {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 40%, transparent 60%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 40%, transparent 60%);
   pointer-events: none;
-  border-radius: 12px;
+  border-radius: 10px;
   z-index: 5;
-}
-
-.tv-scanlines {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.12) 0px, transparent 1px, transparent 2px);
-  pointer-events: none;
-  opacity: 0.35;
-  z-index: 6;
 }
 
 /* Play Overlay */
@@ -274,31 +251,31 @@ body {
   gap: 10px;
   cursor: pointer;
   z-index: 10;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .tv-play-overlay.hidden {
   opacity: 0;
   pointer-events: none;
+  display: none;
 }
 
 .tv-play-disc {
-  width: 58px;
-  height: 58px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: var(--gold-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(229, 190, 109, 0.7);
-  transition: transform 0.2s ease;
+  box-shadow: 0 0 20px rgba(229, 190, 109, 0.6);
 }
 
 .tv-play-disc svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   fill: #0b0c10;
-  margin-right: -3px;
+  margin-right: -2px;
 }
 
 .tv-play-label {
@@ -309,45 +286,33 @@ body {
   font-weight: 700;
 }
 
-/* TV Side Control Panel */
+/* TV Side Panel */
 .tv-side-panel {
-  width: 44px;
+  width: 42px;
   background: linear-gradient(180deg, #18130e 0%, #0d0a07 100%);
-  border: 1px solid rgba(229, 190, 109, 0.25);
-  border-radius: 12px;
+  border: 1px solid rgba(229, 190, 109, 0.2);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 8px 4px;
+  padding: 8px 3px;
 }
 
 .tv-knob {
-  width: 26px;
-  height: 26px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #59452b, #2e2215 70%, #150f09 100%);
   border: 1.5px solid var(--gold-primary);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.6);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tv-knob::after {
-  content: '';
-  width: 2px;
-  height: 9px;
-  background: var(--gold-light);
-  border-radius: 2px;
 }
 
 .tv-speaker-slots {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  width: 22px;
+  width: 20px;
 }
 .tv-slot-line {
   height: 2px;
@@ -356,36 +321,31 @@ body {
 }
 
 .tv-led-indicator {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #00ff88;
-  box-shadow: 0 0 8px #00ff88;
+  box-shadow: 0 0 6px #00ff88;
 }
 
 /* TV Feet */
 .tv-stand-feet {
   width: 75%;
-  height: 12px;
+  height: 10px;
   display: flex;
   justify-content: space-between;
-  margin-top: -2px;
 }
 
 .tv-foot {
-  width: 26px;
-  height: 12px;
+  width: 24px;
+  height: 10px;
   background: linear-gradient(180deg, #caa049, #59452b);
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+  border-radius: 0 0 6px 6px;
 }
 
 /* Navigation to Next Stage */
 .tv-stage-footer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .tv-continue-btn {
@@ -403,8 +363,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 6px 25px rgba(229, 190, 109, 0.45);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(229, 190, 109, 0.4);
+  transition: transform 0.15s ease;
 }
 
 .tv-continue-btn:active {
@@ -412,7 +372,7 @@ body {
 }
 
 /* ========================================================
-   STAGE 1: TYPEWRITER PROLOGUE (المقدمة الكاتبة)
+   STAGE 1: TYPEWRITER PROLOGUE
    ======================================================== */
 .intro-screen {
   position: absolute;
@@ -422,8 +382,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 30px 22px 35px 22px;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  padding: 26px 18px 30px 18px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .intro-screen.fade-out {
@@ -442,7 +402,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 14px;
+  padding: 4px 14px;
   background: rgba(229, 190, 109, 0.1);
   border: 1px solid var(--gold-border);
   border-radius: 20px;
@@ -454,7 +414,7 @@ body {
 .skip-text-btn {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.7);
   font-size: 13px;
   cursor: pointer;
   padding: 4px 8px;
@@ -462,29 +422,27 @@ body {
 
 .intro-body {
   margin: auto 0;
-  background: rgba(16, 19, 28, 0.75);
+  background: rgba(16, 19, 28, 0.8);
   border: 1px solid rgba(229, 190, 109, 0.35);
-  border-radius: 20px;
-  padding: 26px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(229, 190, 109, 0.05);
+  border-radius: 18px;
+  padding: 24px 18px;
 }
 
 .quill-icon {
-  width: 34px;
-  height: 34px;
-  margin: 0 auto 14px auto;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 12px auto;
   display: block;
   fill: var(--gold-primary);
-  filter: drop-shadow(0 0 12px rgba(229, 190, 109, 0.5));
 }
 
 .typewriter-content {
   font-family: var(--font-ruqaa);
-  font-size: 22px;
+  font-size: 21px;
   line-height: 1.85;
   color: #ffffff;
   text-align: center;
-  min-height: 140px;
+  min-height: 130px;
   word-break: break-word;
 }
 
@@ -500,339 +458,7 @@ body {
   100% { opacity: 1; }
 }
 
-.intro-footer {
-  text-align: center;
-}
-
 .open-card-btn {
-  width: 100%;
-  padding: 15px;
-  background: var(--gold-gradient);
-  border: none;
-  border-radius: 30px;
-  color: #08090d;
-  font-family: var(--font-kufi);
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 25px rgba(229, 190, 109, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.open-card-btn:active {
-  transform: scale(0.97);
-}
-
-/* ========================================================
-   STAGE 2: THE MOBILE CARD SCREEN
-   ======================================================== */
-.card-screen {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  min-height: 100vh;
-  padding: 18px 16px 24px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* App Bar */
-.mobile-appbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.app-title-pill {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: rgba(18, 22, 32, 0.85);
-  border: 1px solid var(--gold-border);
-  border-radius: 20px;
-  padding: 5px 15px;
-}
-
-.app-title-pill span {
-  font-family: var(--font-kufi);
-  font-size: 12px;
-  color: var(--gold-light);
-  letter-spacing: 0.5px;
-}
-
-.app-title-pill .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold-primary);
-  box-shadow: 0 0 8px var(--gold-primary);
-}
-
-.appbar-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.circle-icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(18, 22, 32, 0.85);
-  border: 1px solid var(--gold-border);
-  color: var(--gold-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.circle-icon-btn:active {
-  transform: scale(0.92);
-  background: rgba(30, 36, 52, 0.95);
-}
-
-/* ========================================================
-   THE MOBILE LUXURY CARD
-   ======================================================== */
-.mobile-card-container {
-  width: 100%;
-  background: linear-gradient(160deg, #141724 0%, #0d0f16 60%, #08090d 100%);
-  border: 1.5px solid var(--gold-border);
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 25px rgba(229, 190, 109, 0.15);
-  padding: 22px 18px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Gold Corner Accents */
-.card-corner {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid var(--gold-primary);
-  pointer-events: none;
-  opacity: 0.65;
-}
-.card-corner.tl { top: 8px; left: 8px; border-right: none; border-bottom: none; border-radius: 6px 0 0 0; }
-.card-corner.tr { top: 8px; right: 8px; border-left: none; border-bottom: none; border-radius: 0 6px 0 0; }
-.card-corner.bl { bottom: 8px; left: 8px; border-right: none; border-top: none; border-radius: 0 0 0 6px; }
-.card-corner.br { bottom: 8px; right: 8px; border-left: none; border-top: none; border-radius: 0 0 6px 0; }
-
-.card-inner-border {
-  position: absolute;
-  inset: 5px;
-  border: 1px dashed rgba(229, 190, 109, 0.2);
-  border-radius: 20px;
-  pointer-events: none;
-}
-
-/* Header Emblem */
-.card-emblem {
-  text-align: center;
-  margin-bottom: 6px;
-}
-
-.crown-svg {
-  width: 38px;
-  height: 38px;
-  fill: var(--gold-primary);
-  filter: drop-shadow(0 0 10px rgba(229, 190, 109, 0.6));
-}
-
-.card-occasion-tag {
-  display: inline-block;
-  font-family: var(--font-kufi);
-  font-size: 11px;
-  color: var(--gold-light);
-  background: rgba(229, 190, 109, 0.12);
-  padding: 3px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(229, 190, 109, 0.3);
-  margin-top: 4px;
-}
-
-/* Title */
-.card-main-title {
-  font-family: var(--font-kufi);
-  font-weight: 700;
-  font-size: 25px;
-  text-align: center;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-top: 4px;
-  filter: drop-shadow(0 2px 12px rgba(229, 190, 109, 0.45));
-}
-
-/* Teacher Dedication Plaque */
-.teacher-plaque {
-  background: radial-gradient(ellipse at center, #1d2232 0%, #11141c 100%);
-  border: 1.5px solid var(--gold-border);
-  border-radius: 18px;
-  padding: 16px 14px;
-  text-align: center;
-  margin: 12px 0;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 6px 20px rgba(0,0,0,0.4);
-}
-
-.teacher-pretitle {
-  font-size: 11.5px;
-  color: var(--gold-light);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.teacher-fullname {
-  font-family: var(--font-ruqaa);
-  font-weight: 700;
-  font-size: 34px;
-  line-height: 1.35;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(229, 190, 109, 0.7), 0 2px 5px rgba(0,0,0,0.9);
-  margin: 4px 0;
-}
-
-.teacher-fullname .teacher-name-gold {
-  color: #ffd978;
-  text-shadow: 0 0 22px rgba(255, 217, 120, 0.9);
-}
-
-.teacher-subtitle {
-  font-family: var(--font-kufi);
-  font-size: 12px;
-  color: var(--gold-rich);
-  font-weight: 600;
-}
-
-/* Message */
-.card-message {
-  font-family: var(--font-amiri);
-  font-size: 15.5px;
-  line-height: 1.8;
-  color: #ffffff;
-  text-align: center;
-  padding: 0 6px;
-}
-
-.card-message strong {
-  color: var(--gold-light);
-  font-weight: bold;
-}
-
-/* Poetic Banner */
-.poem-banner {
-  background: rgba(9, 10, 15, 0.85);
-  border-right: 3px solid var(--gold-primary);
-  border-left: 3px solid var(--gold-primary);
-  border-radius: 10px;
-  padding: 10px 12px;
-  text-align: center;
-  margin: 12px 0;
-}
-
-.poem-verse {
-  font-family: var(--font-ruqaa);
-  font-size: 18px;
-  color: var(--gold-light);
-  line-height: 1.5;
-}
-
-/* Card Signature Footer */
-.card-signature {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 12px;
-  border-top: 1px solid rgba(229, 190, 109, 0.25);
-  margin-top: 6px;
-}
-
-.designer-info {
-  text-align: right;
-}
-
-.designer-label {
-  font-size: 10.5px;
-  color: rgba(255,255,255,0.65);
-}
-
-.designer-name {
-  font-family: var(--font-kufi);
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--gold-primary);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 2px;
-}
-
-.seal-pill {
-  background: rgba(229, 190, 109, 0.12);
-  border: 1px solid var(--gold-border);
-  border-radius: 15px;
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--gold-light);
-  font-weight: 600;
-}
-
-/* ========================================================
-   MOBILE ACTION BUTTONS
-   ======================================================== */
-.action-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin: 14px 0 10px 0;
-}
-
-.action-card-btn {
-  background: rgba(18, 22, 32, 0.9);
-  border: 1px solid var(--gold-border);
-  border-radius: 16px;
-  padding: 10px 6px;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  transition: all 0.2s ease;
-}
-
-.action-card-btn:active {
-  transform: scale(0.94);
-  background: rgba(30, 36, 52, 0.95);
-  border-color: var(--gold-light);
-}
-
-.action-card-btn .emoji-icon {
-  font-size: 20px;
-}
-
-.action-card-btn span {
-  font-size: 11.5px;
-  color: var(--gold-light);
-  font-family: var(--font-kufi);
-  font-weight: 600;
-}
-
-/* Primary Celebrate Button */
-.main-celebrate-btn {
   width: 100%;
   padding: 14px;
   background: var(--gold-gradient);
@@ -847,22 +473,323 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 6px 20px rgba(229, 190, 109, 0.45);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px rgba(229, 190, 109, 0.4);
+}
+
+.open-card-btn:active {
+  transform: scale(0.97);
+}
+
+/* ========================================================
+   STAGE 2: THE MOBILE CARD SCREEN
+   ======================================================== */
+.card-screen {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px 14px 20px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* App Bar */
+.mobile-appbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.app-title-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 22, 32, 0.9);
+  border: 1px solid var(--gold-border);
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+.app-title-pill span {
+  font-family: var(--font-kufi);
+  font-size: 11.5px;
+  color: var(--gold-light);
+}
+
+.app-title-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-primary);
+}
+
+.appbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.circle-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(18, 22, 32, 0.9);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.circle-icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* ========================================================
+   THE MOBILE LUXURY CARD (High Performance & Clear Typography)
+   ======================================================== */
+.mobile-card-container {
+  width: 100%;
+  background: linear-gradient(160deg, #131722 0%, #0d0f16 60%, #07080c 100%);
+  border: 1.5px solid var(--gold-border);
+  border-radius: 22px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.85);
+  padding: 20px 16px;
+  position: relative;
+}
+
+/* Corner Accents */
+.card-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--gold-primary);
+  pointer-events: none;
+  opacity: 0.65;
+}
+.card-corner.tl { top: 8px; left: 8px; border-right: none; border-bottom: none; border-radius: 5px 0 0 0; }
+.card-corner.tr { top: 8px; right: 8px; border-left: none; border-bottom: none; border-radius: 0 5px 0 0; }
+.card-corner.bl { bottom: 8px; left: 8px; border-right: none; border-top: none; border-radius: 0 0 0 5px; }
+.card-corner.br { bottom: 8px; right: 8px; border-left: none; border-top: none; border-radius: 0 0 5px 0; }
+
+/* Crown */
+.card-emblem {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.crown-svg {
+  width: 36px;
+  height: 36px;
+  fill: var(--gold-primary);
+}
+
+.card-occasion-tag {
+  display: inline-block;
+  font-family: var(--font-kufi);
+  font-size: 11px;
+  color: var(--gold-light);
+  background: rgba(229, 190, 109, 0.12);
+  padding: 3px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(229, 190, 109, 0.3);
+  margin-top: 3px;
+}
+
+/* Title */
+.card-main-title {
+  font-family: var(--font-kufi);
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 4px;
+  text-shadow: 0 2px 10px rgba(229, 190, 109, 0.4);
+}
+
+/* Teacher Dedication Plaque */
+.teacher-plaque {
+  background: radial-gradient(ellipse at center, #1c2130 0%, #10131b 100%);
+  border: 1.5px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 14px 12px;
+  text-align: center;
+  margin: 10px 0;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+}
+
+.teacher-pretitle {
+  font-size: 11px;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.teacher-fullname {
+  font-family: var(--font-ruqaa);
+  font-weight: 700;
+  font-size: 33px;
+  line-height: 1.35;
+  color: #ffffff;
+  margin: 3px 0;
+}
+
+.teacher-fullname .teacher-name-gold {
+  color: #ffd978;
+  text-shadow: 0 0 15px rgba(255, 217, 120, 0.8);
+}
+
+.teacher-subtitle {
+  font-family: var(--font-kufi);
+  font-size: 12px;
+  color: var(--gold-rich);
+  font-weight: 600;
+}
+
+/* Message */
+.card-message {
+  font-family: var(--font-amiri);
+  font-size: 15px;
+  line-height: 1.75;
+  color: #ffffff;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.card-message strong {
+  color: var(--gold-light);
+  font-weight: bold;
+}
+
+/* Poetic Banner */
+.poem-banner {
+  background: rgba(9, 10, 15, 0.85);
+  border-right: 3px solid var(--gold-primary);
+  border-left: 3px solid var(--gold-primary);
+  border-radius: 10px;
+  padding: 9px 10px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.poem-verse {
+  font-family: var(--font-ruqaa);
+  font-size: 17px;
+  color: var(--gold-light);
+  line-height: 1.5;
+}
+
+/* Signature */
+.card-signature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(229, 190, 109, 0.2);
+  margin-top: 4px;
+}
+
+.designer-info {
+  text-align: right;
+}
+
+.designer-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.65);
+}
+
+.designer-name {
+  font-family: var(--font-kufi);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold-primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.seal-pill {
+  background: rgba(229, 190, 109, 0.12);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* Action Buttons Grid */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0 8px 0;
+}
+
+.action-card-btn {
+  background: rgba(18, 22, 32, 0.9);
+  border: 1px solid var(--gold-border);
+  border-radius: 14px;
+  padding: 10px 4px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.action-card-btn:active {
+  transform: scale(0.95);
+}
+
+.action-card-btn .emoji-icon {
+  font-size: 19px;
+}
+
+.action-card-btn span {
+  font-size: 11px;
+  color: var(--gold-light);
+  font-family: var(--font-kufi);
+  font-weight: 600;
+}
+
+/* Main Celebrate Button */
+.main-celebrate-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--gold-gradient);
+  border: none;
+  border-radius: 30px;
+  color: #08090d;
+  font-family: var(--font-kufi);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(229, 190, 109, 0.4);
 }
 
 .main-celebrate-btn:active {
   transform: scale(0.97);
 }
 
-/* ========================================================
-   BOTTOM SHEET / MODAL FOR DEDICATIONS
-   ======================================================== */
+/* Bottom Sheet for Dedications */
 .bottom-sheet {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.82);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.8);
   z-index: 100;
   display: none;
   align-items: flex-end;
@@ -878,33 +805,27 @@ body {
   max-width: 430px;
   background: #11141c;
   border-top: 2px solid var(--gold-primary);
-  border-radius: 24px 24px 0 0;
-  padding: 20px 18px 30px 18px;
+  border-radius: 20px 20px 0 0;
+  padding: 18px 16px 26px 16px;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
 }
 
 .sheet-handle {
-  width: 40px;
+  width: 36px;
   height: 4px;
   background: rgba(255,255,255,0.3);
   border-radius: 2px;
-  margin: 0 auto 14px auto;
+  margin: 0 auto 12px auto;
 }
 
 .sheet-title {
   font-family: var(--font-kufi);
-  font-size: 18px;
+  font-size: 17px;
   color: var(--gold-light);
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .sheet-scroll-list {
@@ -912,28 +833,27 @@ body {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
-  padding-right: 4px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .sheet-item {
   background: rgba(22, 26, 38, 0.85);
   border: 1px solid rgba(229, 190, 109, 0.25);
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 10px;
+  padding: 10px 12px;
 }
 
 .sheet-item-author {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--gold-primary);
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .sheet-item-text {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13.5px;
+  line-height: 1.5;
   color: #fff;
   font-family: var(--font-amiri);
 }
@@ -947,8 +867,8 @@ body {
   flex: 1;
   background: rgba(8, 9, 12, 0.9);
   border: 1px solid var(--gold-border);
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 10px;
+  padding: 9px 12px;
   color: #fff;
   font-size: 13px;
   direction: rtl;
@@ -958,7 +878,7 @@ body {
 .sheet-submit-btn {
   background: var(--gold-gradient);
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 0 16px;
   color: #000;
   font-weight: 700;
@@ -970,10 +890,10 @@ body {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 20px;
-  padding: 8px;
+  padding: 7px;
   color: #bbb;
-  font-size: 13px;
-  margin-top: 10px;
+  font-size: 12px;
+  margin-top: 8px;
   cursor: pointer;
 }
 
@@ -986,14 +906,13 @@ body {
   background: rgba(15, 18, 26, 0.95);
   border: 1px solid var(--gold-primary);
   border-radius: 25px;
-  padding: 8px 20px;
+  padding: 8px 18px;
   font-size: 13px;
   color: #fff;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.8);
   z-index: 200;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
   white-space: nowrap;
 }
 .mobile-toast.show {
@@ -1006,14 +925,12 @@ body {
 
 <div class="mobile-wrapper">
 
-  <!-- Canvases for Mobile FX -->
-  <canvas id="bg-canvas"></canvas>
-  <canvas id="touch-canvas"></canvas>
+  <!-- Lightweight Celebration Canvas (Runs ONLY during fireworks bursts) -->
   <canvas id="celebration-canvas"></canvas>
-  <div class="ambient-spotlight"></div>
+  <div class="ambient-glow"></div>
 
   <!-- ========================================================
-       STAGE 0: THE RETRO/LUXURY TV BROADCAST INTRO (في بداية الموقع)
+       STAGE 0: THE RETRO TV BROADCAST INTRO (في بداية الموقع)
        ======================================================== -->
   <section class="tv-screen-stage" id="tv-screen-stage">
     <div class="tv-stage-header">
@@ -1026,21 +943,18 @@ body {
 
     <!-- The TV Apparatus -->
     <div class="tv-apparatus">
-      <!-- Antennas -->
       <div class="tv-antennas">
         <div class="antenna-rod left"></div>
         <div class="antenna-rod right"></div>
       </div>
 
-      <!-- TV Cabinet -->
       <div class="tv-cabinet">
         <div class="tv-screen-wrapper">
-          <video class="tv-video-element" id="tv-video" playsinline controls preload="auto">
+          <video class="tv-video-element" id="tv-video" playsinline controls preload="metadata">
             <source src="intro_video.mp4" type="video/mp4"/>
             متصفحك لا يدعم تشغيل الفيديو.
           </video>
           <div class="tv-glass-glare"></div>
-          <div class="tv-scanlines"></div>
 
           <!-- Play Overlay -->
           <div class="tv-play-overlay" id="tv-play-overlay">
@@ -1051,13 +965,11 @@ body {
           </div>
         </div>
 
-        <!-- TV Side Controls -->
         <div class="tv-side-panel">
           <div class="tv-led-indicator"></div>
-          <div class="tv-knob" id="tv-knob-ch" title="مفتاح القناة"></div>
-          <div class="tv-knob" id="tv-knob-vol" title="مفتاح الصوت"></div>
+          <div class="tv-knob" id="tv-knob-ch"></div>
+          <div class="tv-knob" id="tv-knob-vol"></div>
           <div class="tv-speaker-slots">
-            <div class="tv-slot-line"></div>
             <div class="tv-slot-line"></div>
             <div class="tv-slot-line"></div>
             <div class="tv-slot-line"></div>
@@ -1065,14 +977,12 @@ body {
         </div>
       </div>
 
-      <!-- TV Feet -->
       <div class="tv-stand-feet">
         <div class="tv-foot"></div>
         <div class="tv-foot"></div>
       </div>
     </div>
 
-    <!-- TV Footer Navigation -->
     <div class="tv-stage-footer">
       <button class="tv-continue-btn" id="btn-from-tv-to-intro">
         <span>المتابعة إلى بطاقة التكريم</span>
@@ -1096,7 +1006,6 @@ body {
       <svg class="quill-icon" viewBox="0 0 24 24">
         <path d="M12 19l7-7 3 3-7 7-3-3z"/>
         <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-        <path d="M2 2l7.586 7.586"/>
         <circle cx="11" cy="11" r="2"/>
       </svg>
       <div class="typewriter-content" id="typewriter-content"></div>
@@ -1123,7 +1032,6 @@ body {
       </div>
 
       <div class="appbar-actions">
-        <!-- Re-watch TV Video Button -->
         <button class="circle-icon-btn" id="btn-rewatch-tv" title="مشاهدة فيديو التلفاز">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
@@ -1151,7 +1059,6 @@ body {
       <div class="card-corner tr"></div>
       <div class="card-corner bl"></div>
       <div class="card-corner br"></div>
-      <div class="card-inner-border"></div>
 
       <!-- Crown & Occasion -->
       <div class="card-emblem">
@@ -1234,7 +1141,7 @@ body {
 
 </div>
 
-<!-- Bottom Sheet for Messages / Gratitude Wall -->
+<!-- Bottom Sheet for Dedications -->
 <div class="bottom-sheet" id="bottom-sheet">
   <div class="sheet-content">
     <div class="sheet-handle"></div>
@@ -1266,13 +1173,13 @@ body {
 </div>
 
 <!-- ========================================================
-     JAVASCRIPT: TV PLAYER, TYPEWRITER, AUDIO & FX
+     JAVASCRIPT: ULTRA-LIGHTWEIGHT EVENT-DRIVEN FX
      ======================================================== -->
 <script>
 (function() {
   'use strict';
 
-  // --- AUDIO SYNTHESIZER ---
+  // --- AUDIO SYNTHESIZER (Web Audio API on demand) ---
   class SoundEngine {
     constructor() {
       this.ctx = null;
@@ -1283,7 +1190,7 @@ body {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
         this.ctx = new AudioCtx();
       }
-      if (this.ctx.state === 'suspended') {
+      if (this.ctx && this.ctx.state === 'suspended') {
         this.ctx.resume();
       }
     }
@@ -1294,49 +1201,45 @@ body {
       const gain = this.ctx.createGain();
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(Math.random() * 80 + 720, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.035);
+      gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.03);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.035);
+      osc.stop(this.ctx.currentTime + 0.03);
     }
-    playChime(freq = 523.25, duration = 1.0, gainVal = 0.12) {
+    playChime(freq = 523.25) {
       if (this.isMuted) return;
       this.init();
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+      gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.8);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + duration);
+      osc.stop(this.ctx.currentTime + 0.8);
     }
     playArpeggio() {
       if (this.isMuted) return;
-      const notes = [523.25, 659.25, 783.99, 1046.50];
-      notes.forEach((f, idx) => {
-        setTimeout(() => this.playChime(f, 1.2, 0.1), idx * 90);
-      });
+      [523.25, 659.25, 783.99].forEach((f, i) => setTimeout(() => this.playChime(f), i * 90));
     }
-    playCelebrateBoom() {
+    playBoom() {
       if (this.isMuted) return;
       this.init();
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(140, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(35, this.ctx.currentTime + 0.6);
-      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.6);
+      osc.frequency.setValueAtTime(130, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(35, this.ctx.currentTime + 0.5);
+      gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.5);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + 0.6);
-      setTimeout(() => this.playChime(880, 1.0, 0.08), 80);
+      osc.stop(this.ctx.currentTime + 0.5);
     }
   }
 
@@ -1348,39 +1251,20 @@ body {
   const tvPlayOverlay = document.getElementById('tv-play-overlay');
   const btnFromTvToIntro = document.getElementById('btn-from-tv-to-intro');
   const btnRewatchTv = document.getElementById('btn-rewatch-tv');
-  const tvKnobCh = document.getElementById('tv-knob-ch');
-  const tvKnobVol = document.getElementById('tv-knob-vol');
 
-  // Play video on overlay click
   tvPlayOverlay.addEventListener('click', () => {
     tvPlayOverlay.classList.add('hidden');
-    tvVideo.play().catch(err => {
-      console.log('Video play error:', err);
-    });
+    tvVideo.play().catch(e => console.log(e));
   });
 
-  tvVideo.addEventListener('play', () => {
-    tvPlayOverlay.classList.add('hidden');
-  });
-
+  tvVideo.addEventListener('play', () => tvPlayOverlay.classList.add('hidden'));
   tvVideo.addEventListener('pause', () => {
-    if (!tvVideo.ended) {
-      tvPlayOverlay.classList.remove('hidden');
-    }
+    if (!tvVideo.ended) tvPlayOverlay.classList.remove('hidden');
   });
 
-  // When video ends, automatically prompt or transition
   tvVideo.addEventListener('ended', () => {
     showToast('✨ انتهى العرض المصور، جاري الانتقال للبطاقة...');
-    setTimeout(transitionFromTvToIntro, 1200);
-  });
-
-  // Knob click sound
-  [tvKnobCh, tvKnobVol].forEach(knob => {
-    knob.addEventListener('click', () => {
-      audio.playKeyClick();
-      showToast('📻 قناة الوفاء: يوم المعلم العالمي');
-    });
+    setTimeout(transitionFromTvToIntro, 1000);
   });
 
   function transitionFromTvToIntro() {
@@ -1392,7 +1276,6 @@ body {
 
   btnFromTvToIntro.addEventListener('click', transitionFromTvToIntro);
 
-  // Rewatch TV button
   btnRewatchTv.addEventListener('click', () => {
     tvStage.classList.remove('fade-out');
     introScreen.classList.remove('fade-out');
@@ -1406,13 +1289,13 @@ body {
   const btnSkipIntro = document.getElementById('btn-skip-intro');
   const introScreen = document.getElementById('intro-screen');
 
-  const lines = [
+  const textLines = [
     "إلى من أنارت عتمة الجهل بنور علمها..",
     "إلى التي صنعت من الحروف أجنحة نُحلّق بها نحو العلا..",
     "المعلمة الفاضلة: آلاء ربابعة",
     "لكِ من قلوبنا عهد الوفاء، وبمداد الذهب نُخلّد هذا التكريم ✨"
   ];
-  const fullText = lines.join("\n\n");
+  const fullText = textLines.join("\n\n");
 
   let charIdx = 0;
   let typeTimer = null;
@@ -1425,16 +1308,14 @@ body {
       if (charIdx < fullText.length) {
         const char = fullText.charAt(charIdx);
         typewriterContent.innerHTML = fullText.substring(0, charIdx + 1) + '<span class="typewriter-cursor">|</span>';
-        if (char !== ' ' && char !== "\n") {
-          audio.playKeyClick();
-        }
+        if (char !== ' ' && char !== "\n") audio.playKeyClick();
         charIdx++;
       } else {
         clearInterval(typeTimer);
         typewriterContent.innerHTML = fullText;
-        audio.playChime(659.25, 1.2, 0.12);
+        audio.playChime(659.25);
       }
-    }, 40);
+    }, 38);
   }
 
   function finishTypingInstantly() {
@@ -1445,17 +1326,14 @@ body {
   function revealCard() {
     audio.playArpeggio();
     introScreen.classList.add('fade-out');
-    launchFireworksBatch();
+    launchFireworksBurst();
     showToast('✨ مرحباً بكم في بطاقة التكريم الملكية');
   }
 
   btnOpenCard.addEventListener('click', revealCard);
   btnSkipIntro.addEventListener('click', () => {
-    if (charIdx < fullText.length) {
-      finishTypingInstantly();
-    } else {
-      revealCard();
-    }
+    if (charIdx < fullText.length) finishTypingInstantly();
+    else revealCard();
   });
 
   document.getElementById('btn-replay').addEventListener('click', () => {
@@ -1463,129 +1341,32 @@ body {
     startTyping();
   });
 
-  // --- BACKGROUND CANVAS PARTICLES ---
-  const bgCanvas = document.getElementById('bg-canvas');
-  const bgCtx = bgCanvas.getContext('2d');
-  let bgParticles = [];
-
-  function resizeCanvases() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    bgCanvas.width = w; bgCanvas.height = h;
-    document.getElementById('touch-canvas').width = w;
-    document.getElementById('touch-canvas').height = h;
-    document.getElementById('celebration-canvas').width = w;
-    document.getElementById('celebration-canvas').height = h;
-  }
-  window.addEventListener('resize', resizeCanvases);
-  resizeCanvases();
-
-  class Stardust {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * bgCanvas.width;
-      this.y = Math.random() * bgCanvas.height;
-      this.size = Math.random() * 2 + 0.6;
-      this.alpha = Math.random() * 0.5 + 0.15;
-      this.speed = -(Math.random() * 0.35 + 0.1);
-    }
-    update() {
-      this.y += this.speed;
-      if (this.y < -5) {
-        this.reset();
-        this.y = bgCanvas.height + 5;
-      }
-    }
-    draw() {
-      bgCtx.beginPath();
-      bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      bgCtx.fillStyle = `rgba(229, 190, 109, ${this.alpha})`;
-      bgCtx.shadowBlur = 4;
-      bgCtx.shadowColor = '#e5be6d';
-      bgCtx.fill();
-    }
-  }
-
-  for (let i = 0; i < 45; i++) bgParticles.push(new Stardust());
-
-  function animateBg() {
-    bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-    for (let p of bgParticles) {
-      p.update();
-      p.draw();
-    }
-    requestAnimationFrame(animateBg);
-  }
-  animateBg();
-
-  // --- TOUCH TRAIL CANVAS ---
-  const touchCanvas = document.getElementById('touch-canvas');
-  const touchCtx = touchCanvas.getContext('2d');
-  let touchParticles = [];
-
-  class TouchSpark {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.vx = (Math.random() - 0.5) * 1.5;
-      this.vy = (Math.random() - 0.5) * 1.5 - 0.3;
-      this.life = 1;
-      this.size = Math.random() * 2.5 + 1.2;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.life -= 0.03;
-    }
-    draw() {
-      touchCtx.beginPath();
-      touchCtx.arc(this.x, this.y, this.size * this.life, 0, Math.PI * 2);
-      touchCtx.fillStyle = `rgba(255, 240, 199, ${this.life})`;
-      touchCtx.shadowBlur = 6;
-      touchCtx.shadowColor = '#e5be6d';
-      touchCtx.fill();
-    }
-  }
-
-  function addTouchSpark(x, y) {
-    for (let i = 0; i < 2; i++) touchParticles.push(new TouchSpark(x, y));
-  }
-
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches[0]) addTouchSpark(e.touches[0].clientX, e.touches[0].clientY);
-  }, { passive: true });
-  window.addEventListener('mousemove', (e) => addTouchSpark(e.clientX, e.clientY));
-
-  function animateTouch() {
-    touchCtx.clearRect(0, 0, touchCanvas.width, touchCanvas.height);
-    for (let i = touchParticles.length - 1; i >= 0; i--) {
-      const p = touchParticles[i];
-      p.update();
-      p.draw();
-      if (p.life <= 0) touchParticles.splice(i, 1);
-    }
-    requestAnimationFrame(animateTouch);
-  }
-  animateTouch();
-
-  // --- CELEBRATION CANVAS: FIREWORKS & ROSES ---
+  // --- HIGH-PERFORMANCE EVENT-DRIVEN CELEBRATION (ZERO IDLE CPU) ---
   const celCanvas = document.getElementById('celebration-canvas');
   const celCtx = celCanvas.getContext('2d');
   let fireworks = [];
   let petals = [];
+  let animId = null;
+
+  function resizeCel() {
+    celCanvas.width = window.innerWidth;
+    celCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCel, { passive: true });
+  resizeCel();
 
   class Firework {
     constructor(x, y, color) {
       this.x = x; this.y = y;
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 6 + 1.5;
+      const speed = Math.random() * 5 + 1.5;
       this.vx = Math.cos(angle) * speed;
       this.vy = Math.sin(angle) * speed;
       this.gravity = 0.12;
       this.friction = 0.96;
       this.life = 1;
       this.color = color;
-      this.size = Math.random() * 2.2 + 1;
+      this.size = Math.random() * 2 + 1;
     }
     update() {
       this.vx *= this.friction;
@@ -1593,14 +1374,13 @@ body {
       this.vy += this.gravity;
       this.x += this.vx;
       this.y += this.vy;
-      this.life -= 0.02;
+      this.life -= 0.025;
     }
     draw() {
       celCtx.beginPath();
-      celCtx.arc(this.x, this.y, this.size * this.life, 0, Math.PI * 2);
-      celCtx.fillStyle = this.color.replace(')', `, ${this.life})`).replace('rgb', 'rgba');
-      celCtx.shadowBlur = 8;
-      celCtx.shadowColor = '#e5be6d';
+      celCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      celCtx.fillStyle = this.color;
+      celCtx.globalAlpha = Math.max(0, this.life);
       celCtx.fill();
     }
   }
@@ -1609,7 +1389,7 @@ body {
     constructor() {
       this.x = Math.random() * celCanvas.width;
       this.y = -15;
-      this.size = Math.random() * 10 + 8;
+      this.size = Math.random() * 8 + 7;
       this.vy = Math.random() * 1.8 + 1.2;
       this.vx = (Math.random() - 0.5) * 1.2;
       this.rotation = Math.random() * 360;
@@ -1629,39 +1409,13 @@ body {
       celCtx.bezierCurveTo(this.size / 2, -this.size / 2, this.size / 2, this.size / 2, 0, this.size);
       celCtx.bezierCurveTo(-this.size / 2, this.size / 2, -this.size / 2, -this.size / 2, 0, -this.size / 2);
       celCtx.fillStyle = '#c72c41';
+      celCtx.globalAlpha = 0.9;
       celCtx.fill();
       celCtx.restore();
     }
   }
 
-  function launchFirework(x, y) {
-    audio.playCelebrateBoom();
-    const colors = ['rgb(255,240,199)', 'rgb(229,190,109)', 'rgb(255,255,255)', 'rgb(202,160,73)'];
-    const col = colors[Math.floor(Math.random() * colors.length)];
-    for (let i = 0; i < 45; i++) {
-      fireworks.push(new Firework(x, y, col));
-    }
-  }
-
-  function showerRoses(count = 25) {
-    for (let i = 0; i < count; i++) {
-      setTimeout(() => petals.push(new RosePetal()), i * 70);
-    }
-  }
-
-  function launchFireworksBatch() {
-    showerRoses(30);
-    for (let i = 0; i < 4; i++) {
-      setTimeout(() => {
-        launchFirework(
-          Math.random() * (celCanvas.width * 0.7) + celCanvas.width * 0.15,
-          Math.random() * (celCanvas.height * 0.4) + celCanvas.height * 0.2
-        );
-      }, i * 260);
-    }
-  }
-
-  function animateCel() {
+  function renderCelebration() {
     celCtx.clearRect(0, 0, celCanvas.width, celCanvas.height);
     for (let i = fireworks.length - 1; i >= 0; i--) {
       const f = fireworks[i];
@@ -1675,23 +1429,58 @@ body {
       p.draw();
       if (p.y > celCanvas.height + 20) petals.splice(i, 1);
     }
-    requestAnimationFrame(animateCel);
+    celCtx.globalAlpha = 1;
+
+    // STOP animation loop when done to save 100% mobile battery!
+    if (fireworks.length > 0 || petals.length > 0) {
+      animId = requestAnimationFrame(renderCelebration);
+    } else {
+      celCtx.clearRect(0, 0, celCanvas.width, celCanvas.height);
+      animId = null;
+    }
   }
-  animateCel();
+
+  function startAnimationLoop() {
+    if (!animId) animId = requestAnimationFrame(renderCelebration);
+  }
+
+  function launchFireworksBurst() {
+    audio.playBoom();
+    const colors = ['#fff0c7', '#e5be6d', '#ffffff', '#caa049'];
+    for (let b = 0; b < 3; b++) {
+      setTimeout(() => {
+        const bx = Math.random() * (celCanvas.width * 0.7) + celCanvas.width * 0.15;
+        const by = Math.random() * (celCanvas.height * 0.35) + celCanvas.height * 0.2;
+        const col = colors[Math.floor(Math.random() * colors.length)];
+        for (let i = 0; i < 35; i++) fireworks.push(new Firework(bx, by, col));
+        startAnimationLoop();
+      }, b * 200);
+    }
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        petals.push(new RosePetal());
+        startAnimationLoop();
+      }, i * 60);
+    }
+  }
 
   // --- BUTTON LISTENERS ---
   document.getElementById('btn-celebrate').addEventListener('click', () => {
-    launchFireworksBatch();
+    launchFireworksBurst();
     showToast('🎉 احتفالية كبرى للمعلمة آلاء ربابعة!');
   });
 
   document.getElementById('btn-roses').addEventListener('click', () => {
-    audio.playChime(659.25, 1.2, 0.15);
-    showerRoses(40);
+    audio.playChime(659.25);
+    for (let i = 0; i < 25; i++) {
+      setTimeout(() => {
+        petals.push(new RosePetal());
+        startAnimationLoop();
+      }, i * 50);
+    }
     showToast('🌹 باقة ورد وفل مهداة للمعلمة الفاضلة');
   });
 
-  // Audio Toggle
   const btnAudio = document.getElementById('btn-audio');
   btnAudio.addEventListener('click', () => {
     audio.init();
@@ -1700,7 +1489,7 @@ body {
     showToast(audio.isMuted ? '🔇 تم كتم المؤثرات الصوتية' : '🎵 تم تشغيل المؤثرات الصوتية');
   });
 
-  // Bottom Sheet for Dedications
+  // Dedication Sheet
   const bottomSheet = document.getElementById('bottom-sheet');
   const btnMessages = document.getElementById('btn-messages');
   const btnCloseSheet = document.getElementById('btn-close-sheet');
@@ -1709,7 +1498,7 @@ body {
   const btnSheetSubmit = document.getElementById('btn-sheet-submit');
 
   btnMessages.addEventListener('click', () => {
-    audio.playChime(587.33, 0.8, 0.1);
+    audio.playChime(587.33);
     bottomSheet.classList.add('open');
   });
 
@@ -1724,7 +1513,7 @@ body {
       showToast('⚠️ يُرجى كتابة كلمة شكر أولاً');
       return;
     }
-    audio.playChime(784, 1.0, 0.15);
+    audio.playChime(784);
     const item = document.createElement('div');
     item.className = 'sheet-item';
     item.innerHTML = `
@@ -1736,9 +1525,9 @@ body {
     showToast('✨ تم تثبيت إهدائك بنجاح');
   });
 
-  // --- SAVE / EXPORT CARD FOR MOBILE (PNG) ---
+  // Image Export (Lightweight on-demand)
   document.getElementById('btn-save-img').addEventListener('click', () => {
-    audio.playChime(784, 0.8, 0.12);
+    audio.playChime(784);
     showToast('⏳ جاري تجهيز وتحميل بطاقة الهاتف...');
 
     const canvas = document.createElement('canvas');
@@ -1746,7 +1535,6 @@ body {
     canvas.height = 1920;
     const ctx = canvas.getContext('2d');
 
-    // Gradient background
     const bgGrad = ctx.createLinearGradient(0, 0, 0, 1920);
     bgGrad.addColorStop(0, '#141724');
     bgGrad.addColorStop(0.5, '#0c0e14');
@@ -1754,56 +1542,43 @@ body {
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, 1080, 1920);
 
-    // Outer Gold Border
     ctx.strokeStyle = '#e5be6d';
     ctx.lineWidth = 12;
     ctx.strokeRect(40, 40, 1000, 1840);
 
-    ctx.strokeStyle = 'rgba(229, 190, 109, 0.35)';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(60, 60, 960, 1800);
-
-    // Texts
     ctx.textAlign = 'center';
     ctx.fillStyle = '#fff0c7';
     ctx.font = 'bold 38px "Cairo", sans-serif';
     ctx.fillText('✦ بمناسبة يوم المعلم العالمي ✦', 540, 260);
 
-    ctx.font = 'bold 74px "Reem Kufi", "Amiri", serif';
+    ctx.font = 'bold 74px "Reem Kufi", serif';
     ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(229, 190, 109, 0.6)';
-    ctx.shadowBlur = 25;
     ctx.fillText('يوم الوفاء لصانعة الأجيال', 540, 420);
-    ctx.shadowBlur = 0;
 
-    // Plaque Box
     ctx.fillStyle = '#181c28';
-    ctx.roundRect ? ctx.roundRect(140, 520, 800, 360, [30]) : ctx.fillRect(140, 520, 800, 360);
-    ctx.fill();
+    ctx.fillRect(140, 520, 800, 360);
     ctx.strokeStyle = '#e5be6d';
     ctx.lineWidth = 4;
-    ctx.stroke();
+    ctx.strokeRect(140, 520, 800, 360);
 
     ctx.fillStyle = '#fff0c7';
     ctx.font = '32px "Cairo", sans-serif';
     ctx.fillText('تُكَرَّمُ هذه اللحظة النورانية الفاضلة', 540, 610);
 
     ctx.fillStyle = '#ffd978';
-    ctx.font = 'bold 80px "Aref Ruqaa", "Amiri", serif';
+    ctx.font = 'bold 80px "Aref Ruqaa", serif';
     ctx.fillText('المعلمة: آلاء ربابعة', 540, 725);
 
     ctx.fillStyle = '#caa049';
     ctx.font = '30px "Cairo", sans-serif';
     ctx.fillText('منارة العلم والأثر الخالد ومربية الأجيال', 540, 810);
 
-    // Message
     ctx.fillStyle = '#ffffff';
     ctx.font = '40px "Amiri", serif';
     ctx.fillText('إلى النور الذي أضاء دروبنا، وغرس في عقولنا', 540, 1030);
     ctx.fillText('شغف المعرفة والارتقاء..', 540, 1100);
     ctx.fillText('كل عام وأنتِ شعلة العطاء والسمو والإلهام.', 540, 1170);
 
-    // Poem box
     ctx.fillStyle = '#0a0c10';
     ctx.fillRect(160, 1290, 760, 140);
     ctx.strokeStyle = '#e5be6d';
@@ -1811,10 +1586,9 @@ body {
     ctx.strokeRect(160, 1290, 760, 140);
 
     ctx.fillStyle = '#fff0c7';
-    ctx.font = 'bold 44px "Aref Ruqaa", "Amiri", serif';
+    ctx.font = 'bold 44px "Aref Ruqaa", serif';
     ctx.fillText('« قُم لِلمُعَلِّمِ وَفِّهِ التَبجيلا .. كادَ المُعَلِّمُ أَن يَكونَ رَسولا »', 540, 1380);
 
-    // Footer signature
     ctx.fillStyle = 'rgba(255,255,255,0.7)';
     ctx.font = '30px "Cairo", sans-serif';
     ctx.fillText('إعداد وتصميم الطالب: غالب الجازي', 540, 1650);
@@ -1829,7 +1603,7 @@ body {
       a.href = canvas.toDataURL('image/png');
       a.click();
       showToast('✅ تم تحميل بطاقة الهاتف بنجاح!');
-    }, 400);
+    }, 300);
   });
 
   // Toast Function
@@ -1838,7 +1612,7 @@ body {
   function showToast(msg) {
     toastText.innerText = msg;
     mobileToast.classList.add('show');
-    setTimeout(() => mobileToast.classList.remove('show'), 2500);
+    setTimeout(() => mobileToast.classList.remove('show'), 2200);
   }
 
 })();
